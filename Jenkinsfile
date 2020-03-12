@@ -1,10 +1,4 @@
 pipeline {
-    stage('Pre') {
-            steps {
-                input message: 'no queres matar la app por si esta levantada?'
-                sh './jenkins/scripts/kill.sh'
-            }
-        }
     agent {
         docker {
             image 'node:6-alpine' 
@@ -15,6 +9,12 @@ pipeline {
         CI = 'true'
     }
     stages {
+        stage('Pre') {
+            steps {
+                input message: 'no queres matar la app por si esta levantada?'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
         stage('Build') { 
             steps {
                 sh 'npm install' 
